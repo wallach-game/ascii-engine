@@ -67,8 +67,7 @@ class Game {
         // setTimeout(Game.gameLoop, 1000 / 15); // Adjust 1000/30 for desired FPS
         Game.deltaTime = (performance.now() - Game.prevTime);
         //console.log((1000 / 15) * Game.deltaTime);
-        console.log(Game.gameObjects[0].x);
-        console.log(Game.gameObjects[0].y);
+
         requestAnimationFrame(Game.gameLoop);
         Game.fpscounter.innerHTML = `FPS: ${Math.floor( 1 / (Game.deltaTime/ 1000))}`;
         //setTimeout(Game.gameLoop, (1000 / 60) * Game.deltaTime);
@@ -76,35 +75,9 @@ class Game {
 
     static gameStart() {
         Game.renderInit();
-        let player = new Player(5, 5, "<span style='color:red'>P</span>", false);
-        //let wall = new Wall(10,10,"W", true);
-        Game.gameObjects.push(player);
 
-        let width = 100; // Adjust width and height as needed
-        let height = 100;
-        let noiseMap = new Array(width * height).fill(0);
-
-        for (let y = 0; y < height; y++) {
-            for (let x = 0; x < width; x++) {
-                noiseMap[y * width + x] = Math.random();
-            }
-        }
-
-        let wallThreshold = 0.68; // Adjust threshold for desired wall density
-
-        for (let y = 0; y < 25; y++) {
-            for (let x = 0; x < 80; x++) {
-                let noiseValue = noiseMap[y * width + x];
-                if (noiseValue > wallThreshold) {
-                    let wall = new Wall(x * 1, y * 1, `<span style='color: rgb(${(0.5 - noiseValue) * -255},${(0.5 - noiseValue) * -255},${(0.5 - noiseValue) * -255})'>■</span>`, true); // Cre■ ■  ■■ate a wall object
-                    Game.gameObjects.push(wall); // Add to your game objects array
-                } else {
-                    // Create floor or other terrain elements as needed
-                }
-            }
-        }
-
-
+    
+        //here should be call for setup of every object alive when scene where scene begins
 
 
         document.addEventListener("keydown", (event) => {
@@ -125,6 +98,8 @@ class Game {
                 Game.gameObjects[0].move("right");
             }
         });
+
+
         Game.gameLoop();
     }
 
