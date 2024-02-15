@@ -10,6 +10,10 @@ class LevelEditor {
         document.body.addEventListener("keydown" ,(event) => {
             if(event.key == "p") this.placeObject(this.mouseCoords);
         });
+
+        document.body.addEventListener("keydown" ,(event) => {
+            if(event.key == "r") this.removeObject(this.mouseCoords);
+        });
     }
 
     setMouseCoords(coords){
@@ -22,6 +26,17 @@ class LevelEditor {
     {
         Game.gameObjects[coords.obj.id].ltInit = false;
         let object = new EditorObject(coords.x, coords.y,this.userObjects.selectedObject.symbol,this.userObjects.selectedObject.collision);
+        object.id = coords.obj.id 
+        object.init();
+        Game.gameObjects[coords.obj.id] = object;
+        //TODO fix why it crashed after second wall is placed
+        //this.placedObjects.push(object);
+    }
+
+    removeObject(coords)
+    {
+        Game.gameObjects[coords.obj.id].ltInit = false;
+        let object = new EditorObject(coords.x, coords.y," ",false);
         object.id = coords.obj.id 
         object.init();
         Game.gameObjects[coords.obj.id] = object;
