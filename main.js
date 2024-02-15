@@ -15,18 +15,21 @@ function loadClass(className) {
 
 var loaded = false;
 
-var classList = ["GameObject"];
+var classList = ["systemClasses/GameObject"
+,"systemClasses/LevelEditor",
+"systemClasses/EditorObject",
+"systemClasses/UserObjects"
+];
 
 var userClasses = [
-    // "testclass",
-    // "testclass2",
+
 ];
 
 userClasses.forEach(element => {
     classList.push(element);
 });
 
-classList.push("Game");
+classList.push("systemClasses/Game");
 
 var classLoadIndex = 0;
 

@@ -4,6 +4,8 @@ class GameObject {
       this.y = y;
       this.symbol = symbol;
       this.collision = collision;
+      this.id = -1;
+      this.ltInit = false;
     }
   
     update() {

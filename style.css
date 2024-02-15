@@ -2,7 +2,7 @@
     font-family: monospace;
     background-color: black;
     color: white;
-    padding: 10px;
+    padding: 10px; 
     width: 800px;
     height: 400px;
     overflow-y: scroll;
@@ -12,4 +12,10 @@
 
 body {
   background-color: rgb(38, 39, 77);
+  color: #aaaaaa;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.editorObject:hover {
+  color: red;
 }
