@@ -29,18 +29,16 @@ class LevelEditor {
         object.id = coords.obj.id 
         object.init();
         Game.gameObjects[coords.obj.id] = object;
-        //TODO fix why it crashed after second wall is placed
         //this.placedObjects.push(object);
     }
 
     removeObject(coords)
     {
         Game.gameObjects[coords.obj.id].ltInit = false;
-        let object = new EditorObject(coords.x, coords.y," ",false);
+        let object = new EditorObject(coords.x, coords.y,"\u00A0",false);
         object.id = coords.obj.id 
         object.init();
         Game.gameObjects[coords.obj.id] = object;
-        //TODO fix why it crashed after second wall is placed
         //this.placedObjects.push(object);
     }
 

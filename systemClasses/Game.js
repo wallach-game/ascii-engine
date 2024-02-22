@@ -11,13 +11,26 @@ class Game {
     static gameObjectIdCounter = 0;
     static pause = false;
     static selectedId = -1;
+    static renderNeeded = [];
 
+
+    // static renderInit() {
+    //     for (let i = 0; i < 25; i++) {
+    //         this.pixels[i] = [];
+    //         for (let j = 0; j < 80; j++) {
+    //             this.pixels[i][j] = i * this.MAX_X + j + 1;
+    //         }
+    //     }
+    // }
 
     static renderInit() {
+        // Initialize renderNeeded array
         for (let i = 0; i < 25; i++) {
+            this.renderNeeded[i] = [];
             this.pixels[i] = [];
             for (let j = 0; j < 80; j++) {
-                this.pixels[i][j] = i * this.MAX_X + j + 1;
+                this.renderNeeded[i][j] = true;
+                this.pixels[i][j] = "\u00A0";
             }
         }
     }
@@ -26,28 +39,70 @@ class Game {
         for (let i = 0; i < 25; i++) {
             for (let j = 0; j < 80; j++) {
                 this.pixels[i][j] = "\u00A0";
+                this.renderNeeded[i][j] = true;
             }
         }
     }
 
+    // static renderSymbol(x, y, symbol) {
+    //     this.pixels[y][x] = symbol;
+    // }
+
     static renderSymbol(x, y, symbol) {
-        this.pixels[y][x] = symbol;
+        if (this.pixels[y][x] !== symbol) {
+            this.pixels[y][x] = symbol;
+            this.renderNeeded[y][x] = true; // Set renderNeeded for this pixel
+        }
+        else{
+            this.renderNeeded[y][x] = false;
+            this.pixels[y][x] = true;
+
+        }
     }
+
+    // static updateScreen() {
+    //     let output = "";
+    //     for (let y = 0; y < 25; y++) {
+    //         for (let x = 0; x < 80; x++) {
+    //             let mouseCoords = Game.levelEditor.mouseCoords;
+    //             if (x == mouseCoords.x && y == mouseCoords.y) 
+    //             { 
+    //                 output += `<span id="editorObj${Game.selectedId}" style='color:red'>■</span>`;
+    //             }
+    //             else
+    //             {
+    //                 output += this.pixels[y][x];
+    //             }
+                
+    //         }
+    //         output += "\n";
+    //     }
+    //     this.screen.innerHTML = output;
+        // this.gameObjects.forEach(element => {
+        //     if (element.ltInit) {
+        //         element.lateInit();
+        //     }
+        // });
+
+    // }
+
+    //TODO - Separate Render code into its own class.
 
     static updateScreen() {
         let output = "";
         for (let y = 0; y < 25; y++) {
             for (let x = 0; x < 80; x++) {
                 let mouseCoords = Game.levelEditor.mouseCoords;
-                if (x == mouseCoords.x && y == mouseCoords.y) 
-                { 
+                if (x === mouseCoords.x && y === mouseCoords.y) {
                     output += `<span id="editorObj${Game.selectedId}" style='color:red'>■</span>`;
+                } else {
+                    if (this.renderNeeded[y][x]) {
+                        output += this.pixels[y][x];
+                        this.renderNeeded[y][x] = false; // Reset renderNeeded for this pixel
+                    } else {
+                        output += "\u00A0"; // Non-changed pixels are spaces
+                    }
                 }
-                else
-                {
-                    output += this.pixels[y][x];
-                }
-                
             }
             output += "\n";
         }
@@ -57,7 +112,6 @@ class Game {
                 element.lateInit();
             }
         });
-
     }
 
     static gameLoop() {
@@ -79,7 +133,7 @@ class Game {
         // Render all game objects (replace with your rendering logic)
         for (const gameObject of Game.gameObjects) {
             gameObject.render();
-            //TODO create pixel object
+    
         }
 
         Game.updateScreen();
