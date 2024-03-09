@@ -12,6 +12,6 @@ class GameObject {
     }
   
     render() {
-        Game.renderSymbol(this.x, this.y, this.symbol); 
+        Render.renderSymbol(this.x, this.y, this.symbol); 
     }
   }

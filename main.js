@@ -18,7 +18,8 @@ var loaded = false;
 var classList = ["systemClasses/GameObject"
 ,"systemClasses/LevelEditor",
 "systemClasses/EditorObject",
-"systemClasses/UserObjects"
+"systemClasses/UserObjects",
+"systemClasses/Render"
 ];
 
 var userClasses = [
