@@ -2,6 +2,12 @@ export class Coords {
         public x: number = 0;
         public y: number = 0;
 
+        constructor()
+        {
+            this.x = 0;
+            this.y = 0;
+        }
+
         Add(coods: Coords):Coords
         {
             let ph: Coords = this

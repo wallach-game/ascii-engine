@@ -1,13 +1,14 @@
-import { Coords } from "./Coords";
-import { GameObject } from "./GameObject";
+import { Coords } from "./Coords.js";
+import { GameObject } from "./GameObject.js";
 
 export class Cell {
     coords: Coords = new Coords();
-    gameObjects : GameObject[] = [];
+    symbol: string = '';
+    color: string = '';
+    hash: number = 0;
+    empty: boolean = true;
 
-    public Cell(x:number, y:number)
+    constructor()
     {
-        this.coords.x = x;
-        this.coords.y = y;
     }
 }

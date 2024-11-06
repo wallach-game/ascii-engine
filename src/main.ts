@@ -1,2 +1,4 @@
-import {Game} from "../src/CoreClasses/Game"
-Game.RenderInit(document.getElementsByName("gameWindow")[0]);
+import {Game} from "./CoreClasses/Game.js"
+//brb
+Game.Init();
+Game.RenderInit(document.getElementsByClassName("gameWindow")[0] as HTMLElement);

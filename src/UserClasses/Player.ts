@@ -1,14 +1,22 @@
-import { GameObject} from '../CoreClasses/GameObject';
-import { Coords } from '../CoreClasses/Coords';
-import { IMoveable } from '../Interfaces/systemInterfaces/IMoveable'
+import { GameObject} from '../CoreClasses/GameObject.js';
+import { Coords } from '../CoreClasses/Coords.js';
+import { IMoveable } from '../Interfaces/systemInterfaces/IMoveable.js'
 // @ts-check
 
-class Player extends GameObject implements IMoveable {
+export class Player extends GameObject implements IMoveable {
 
 
      Move(direction: Coords, distance: number):void
     {
         this.coords = this.coords.Add(direction.Mul(distance));
+    }
+
+    Update(): void {
+        this.coords.x +=1;
+        if(this.coords.x >= 9)
+        {
+            this.coords.x = 0;
+        }
     }
 
     public Player(){
