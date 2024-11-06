@@ -20,6 +20,19 @@ export class Game {
         for (let i = 0; i < Game.height; i++) {
             Game.cells[i] = new Array(Game.length);
         }
+        Game.RenderInit();
+    }
+
+    //move to seperate class.
+
+    static RenderInit(gameWindow: HTMLElement):void {
+        //its not goin to be that easy
+    }
+
+
+
+    ):void {
+        //Implement 
     }
 
     static RegisterGameobject(gameObject: GameObject) {
