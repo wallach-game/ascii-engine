@@ -18,6 +18,11 @@ export class Game {
     private static deltaTime: number = 0;
     private static timeRef: number = 0;
 
+    public static DeltaTime():number{
+        return Game.deltaTime;
+    }
+
+
 
     public Game() {
         throw TypeError("Game class is strictly static");
