@@ -98,6 +98,7 @@ export class Game {
         Game.Render();
         Game.deltaTime = performance.now() - Game.prevFrameTime;
         let fpsCounter: HTMLElement = document.getElementsByClassName("fpscounter")[0] as HTMLElement;
+        let deltaTimeOut: HTMLElement = document.getElementsByClassName("deltaTime")[0] as HTMLElement;
         
         //vsync
         let fpsCapElem: HTMLInputElement | null = document.getElementById("fpsCap") as HTMLInputElement;
@@ -108,13 +109,15 @@ export class Game {
         let fps:string;
         if(maxFrameRateDelay <= 0)
         {
-            fps= ((1 / Game.deltaTime)*1000).toFixed(2);
+            maxFrameRateDelay = 0;
         }
-        else
-        {
-            fps= ((1 / maxFrameRateDelay)*1000).toFixed(2);
-        }
+        fps= ((1 / maxFrameRateDelay)*1000).toFixed(2);
+        // else
+        // {
+        //     
+        // }
         fpsCounter.innerText = `FPS: ${fps}`;
+        deltaTimeOut.innerText = `DeltaTime: ${Math.round((Game.deltaTime*10))}`;
         setTimeout(Game.NextFrameHandler, maxFrameRateDelay);
     }
 
