@@ -1,8 +1,9 @@
 import { GameObject} from '../CoreClasses/GameObject.js';
 import { Coords } from '../CoreClasses/Coords.js';
 import { IMoveable } from '../Interfaces/systemInterfaces/IMoveable.js'
-import { WholeNumberCompensator2D } from '../CoreClasses/WholeNumberCompensator2D.js';
-import { WholeNumberCompensator } from '../CoreClasses/WholeNumberCompensator.js';
+import { WholeNumberCompensator2D } from '../CoreClasses/Helpers/WholeNumberCompensator2D.js';
+import { WholeNumberCompensator } from '../CoreClasses/Helpers/WholeNumberCompensator.js';
+import { Input } from '../CoreClasses/Input.js';
 // @ts-check
 
 export class Player extends GameObject implements IMoveable {
@@ -15,18 +16,17 @@ export class Player extends GameObject implements IMoveable {
 
      Move(direction: Coords, distance: number):void
     {
-        this.coords = this.coords.Add(direction.Mul(distance));
+        this.coords = this.coords.Add(direction.Mul(distance);
     }
 
     Update(): void {
-
-
+        console.log(Input.GetKey("f"));
         // this.coords.x += Math.ceil(2 * Game.DeltaTime());
         // this.coords.y += Math.ceil(2 * Game.DeltaTime());
         let dir = new Coords();
         dir.x = 1;
         dir.y = 1;
-        this.movementCompensator.AccumulateChange(dir.Mul(2));
+        this.movementCompensator.AccumulateChange(dir.Mul(4));
         this.coords.Add(this.movementCompensator.GetChange());
         //console.log(this.coords)
 

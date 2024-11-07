@@ -4,6 +4,7 @@ import { Level } from './Level.js';
 import { MurMurHash } from './Helpers/MurMurHash.js';
 import { Array2D } from './Helpers/Array2D.js';
 import { Player } from '../UserClasses/Player.js'
+import { Input } from './Input.js';
 export class Game {
 
 
@@ -33,6 +34,7 @@ export class Game {
     //initialize class
     static Init(): void {
         Game.cells = new Array2D(Game.width, Game.height, new Cell());
+        Input.Init();
     }
 
     //move to seperate class.
