@@ -3,3 +3,5 @@ dist/*
 node_modules/*
 
 # Ignore all JavaScript files
+# remove for build upload to pages
+*.js 
