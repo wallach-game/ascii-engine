@@ -25,7 +25,7 @@ export class Player extends GameObject implements IMoveable {
         // this.coords.y += Math.ceil(2 * Game.DeltaTime());
         let dir = new Coords();
         dir.x = 1;
-        dir.y = 0;
+        dir.y = 1;
         this.movementCompensator.AccumulateChange(dir.Mul(2));
         this.coords.Add(this.movementCompensator.GetChange());
         //console.log(this.coords)

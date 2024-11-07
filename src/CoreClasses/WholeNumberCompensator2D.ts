@@ -6,18 +6,18 @@ export class WholeNumberCompensator2D {
 
     public AccumulateChange(change: Coords)
     {
-        this.accumulated.Add(change.Mul(Game.DeltaTime()));
+        this.accumulated.Add(change.Mul((Game.DeltaTime()*0.01)));
     }
 
     public GetChange():Coords {
         let cdTR: Coords = this.accumulated;
         if(cdTR.Dia() >= 1)
         {
-            console.log("over 1");
-            console.log(this.accumulated);
+            // console.log("over 1");
+            // console.log(this.accumulated);
             this.accumulated = new Coords();
             cdTR.Floor();
-            console.log(cdTR);
+            // console.log(cdTR);
             return cdTR;
         }
         else

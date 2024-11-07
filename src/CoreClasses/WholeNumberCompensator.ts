@@ -6,7 +6,7 @@ export class WholeNumberCompensator {
 
     public AccumulateChange(change: number)
     {
-        this.accumulated += change*Game.DeltaTime();
+        this.accumulated += change*Game.DeltaTime()*0.01;
     }
 
     public GetChange():number {

@@ -18,7 +18,9 @@ export class Game {
     private static deltaTime: number = 0;
     private static timeRef: number = 0;
 
-    public static DeltaTime():number{
+    private static targetFPS: number = 45;
+
+    public static DeltaTime(): number {
         return Game.deltaTime;
     }
 
@@ -91,34 +93,48 @@ export class Game {
 
     private static GameLoop(): void {
         //Call updates on GameObjects
-        Game.prevFrameTime = performance.now();
-        for (let i = 0; i < Game.gameObjects.length; i++) {
-            Game.gameObjects[i].Update();
-        }
-        Game.Render();
-        Game.deltaTime = performance.now() - Game.prevFrameTime;
-        let fpsCounter: HTMLElement = document.getElementsByClassName("fpscounter")[0] as HTMLElement;
-        let deltaTimeOut: HTMLElement = document.getElementsByClassName("deltaTime")[0] as HTMLElement;
         
-        //vsync
-        let fpsCapElem: HTMLInputElement | null = document.getElementById("fpsCap") as HTMLInputElement;
-        let fpsCap: number = 30;
-        if(fpsCapElem != null) fpsCap = Number.parseInt(fpsCapElem.value || "60");
-        let maxFrameRateDelay:number = 1/fpsCap * 1000;
-        maxFrameRateDelay -= Game.deltaTime;
-        let fps:string;
-        if(maxFrameRateDelay <= 0)
-        {
-            maxFrameRateDelay = 0;
+        const frameDuration: number = 1000 / Game.targetFPS;
+        //Game.prevFrameTime = performance.now();
+
+
+        const currentTime: number = performance.now();
+        Game.deltaTime = currentTime - Game.prevFrameTime;
+
+
+        if (Game.deltaTime >= frameDuration) {
+            Game.prevFrameTime = currentTime;
+            for (let i = 0; i < Game.gameObjects.length; i++) {
+                Game.gameObjects[i].Update();
+            }
+
+            Game.Render();
+
+            // Game.deltaTime = performance.now() - Game.prevFrameTime;
+            let fpsCounter: HTMLElement = document.getElementsByClassName("fpscounter")[0] as HTMLElement;
+            let deltaTimeOut: HTMLElement = document.getElementsByClassName("deltaTime")[0] as HTMLElement;
+
+            //vsync
+            let fpsCapElem: HTMLInputElement | null = document.getElementById("fpsCap") as HTMLInputElement;
+            // let fpsCap: number = 30;
+            if (fpsCapElem != null) Game.targetFPS = Number.parseInt(fpsCapElem.value || "60");
+            // let maxFrameRateDelay: number = 1 / fpsCap * 1000;
+            // maxFrameRateDelay -= Game.deltaTime;
+            // let fps: string;
+            // if (maxFrameRateDelay <= 0) {
+            //     maxFrameRateDelay = 0;
+            // }
+            // fps = ((1 / maxFrameRateDelay) * 1000).toFixed(2);
+            // else
+            // {
+            //     
+            // }
+            fpsCounter.innerText = `FPS: ${(1000/Game.deltaTime).toFixed()}`;
+            deltaTimeOut.innerText = `DeltaTime: ${Math.round((Game.deltaTime * 10))}`;
         }
-        fps= ((1 / maxFrameRateDelay)*1000).toFixed(2);
-        // else
-        // {
-        //     
-        // }
-        fpsCounter.innerText = `FPS: ${fps}`;
-        deltaTimeOut.innerText = `DeltaTime: ${Math.round((Game.deltaTime*10))}`;
-        setTimeout(Game.NextFrameHandler, maxFrameRateDelay);
+
+        requestAnimationFrame(Game.GameLoop);
+        // setTimeout(Game.NextFrameHandler, maxFrameRateDelay);
     }
 
     static NextFrameHandler(): void {
@@ -138,7 +154,7 @@ export class Game {
             cell.symbol = gO.symbol;
             cell.color = gO.color;
             cell.empty = false;
-            cell.hash = MurMurHash.ToHash(gO.symbol+gO.color,0);
+            cell.hash = MurMurHash.ToHash(gO.symbol + gO.color, 0);
             //add color
         }
 
@@ -152,12 +168,11 @@ export class Game {
                 if (typeof gameObjectsToRender.array[i][j] == "function") continue;
                 if (Game.cells.array[i][j].hash != gameObjectsToRender.array[i][j].hash) {
                     let elem = document.getElementById(`${i};${j}`);
-                    if (elem != null) 
-                        {
-                            let gO:Cell  = gameObjectsToRender.array[i][j];
-                            elem.style.color = gO.color;
-                            elem.innerText = gO.symbol;
-                        }
+                    if (elem != null) {
+                        let gO: Cell = gameObjectsToRender.array[i][j];
+                        elem.style.color = gO.color;
+                        elem.innerText = gO.symbol;
+                    }
                 }
                 // }
 
