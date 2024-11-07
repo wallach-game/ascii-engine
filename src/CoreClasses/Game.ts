@@ -73,6 +73,8 @@ export class Game {
         for (let i = 0; i < Game.gameObjects.length; i++) {
             Game.gameObjects[i].Start();
         }
+        //TODO create an fps couter here
+        //and create an variable Time.deltaTime.
         setInterval(this.GameLoop,200);
     }
 
@@ -83,6 +85,8 @@ export class Game {
         }
         Game.Render();
     }
+
+    //TODO movr rendering to its own seperate class
 
     private static Render(): void {
         //care ab render lol

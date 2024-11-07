@@ -1,0 +1,17 @@
+.flex {
+    display: flex;
+}
+
+
+.jtCenter{
+    justify-content: center;
+}
+
+
+.itCenter {
+    align-items: center;
+}
+
+
+.centerWrapper{
+}
