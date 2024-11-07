@@ -1,6 +1,6 @@
 export class MurMurHash {
 
-    static ToMurMurHash(str: string, seed: number = 0): number {
+    static ToHash(str: string, seed: number = 0): number {
         let hash = seed ^ str.length;
         let i = 0;
       

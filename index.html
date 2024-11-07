@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
 <body>
-    <h2>Game title</h2>
-    <div class="centerWrapper flex jtCenter itCenter"></div>
-    <div class="gameWindow">
+   
+    <div class="centerWrapper flex jtCenter itCenter col">
+        <h2>Game title</h2>
+        <div class="gameWindow"></div>
+        <span class="fpscounter">FPS: </span>
+        fpsCap
+        <input type="range" id="fpsCap" name="slider" min="1" max="120" value="15">
     </div>
-    <span class="fpscouter">FPS: </span>
+ 
     <script type="module" src="src/main.js"></script>
 </body>
+
 </html>
