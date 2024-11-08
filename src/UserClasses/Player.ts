@@ -16,7 +16,7 @@ export class Player extends GameObject implements IMoveable {
 
      Move(direction: Coords, distance: number):void
     {
-        this.coords = this.coords.Add(direction.Mul(distance);
+        this.coords = this.coords.Add(direction.Mul(distance));
     }
 
     Update(): void {

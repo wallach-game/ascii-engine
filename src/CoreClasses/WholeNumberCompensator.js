@@ -4,7 +4,7 @@ export class WholeNumberCompensator {
         this.accumulated = 0;
     }
     AccumulateChange(change) {
-        this.accumulated += change * Game.DeltaTime();
+        this.accumulated += change * Game.DeltaTime() * 0.01;
     }
     GetChange() {
         let cdTR = this.accumulated;

@@ -39,7 +39,7 @@ export class Game {
 
     //move to seperate class.
     static RenderInit(gameWindow: HTMLElement): void {
-        document.body.style.backgroundColor = "#cccccc";
+        document.body.style.backgroundColor = "#333333";
         gameWindow.style.display = "grid";
         gameWindow.style.gridTemplateColumns = `repeat(${Game.width},1fr)`;
         gameWindow.style.backgroundColor = "#dbdbdb";
@@ -131,6 +131,8 @@ export class Game {
             // {
             //     
             // }
+            fpsCounter.style.color = "white";
+            deltaTimeOut.style.color = "white";
             fpsCounter.innerText = `FPS: ${(1000/Game.deltaTime).toFixed()}`;
             deltaTimeOut.innerText = `DeltaTime: ${Math.round((Game.deltaTime * 10))}`;
         }

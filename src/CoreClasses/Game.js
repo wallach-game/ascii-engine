@@ -3,6 +3,7 @@ import { Level } from './Level.js';
 import { MurMurHash } from './Helpers/MurMurHash.js';
 import { Array2D } from './Helpers/Array2D.js';
 import { Player } from '../UserClasses/Player.js';
+import { Input } from './Input.js';
 export class Game {
     static DeltaTime() {
         return Game.deltaTime;
@@ -13,10 +14,11 @@ export class Game {
     //initialize class
     static Init() {
         Game.cells = new Array2D(Game.width, Game.height, new Cell());
+        Input.Init();
     }
     //move to seperate class.
     static RenderInit(gameWindow) {
-        document.body.style.backgroundColor = "#cccccc";
+        document.body.style.backgroundColor = "#333333";
         gameWindow.style.display = "grid";
         gameWindow.style.gridTemplateColumns = `repeat(${Game.width},1fr)`;
         gameWindow.style.backgroundColor = "#dbdbdb";
@@ -65,29 +67,42 @@ export class Game {
     }
     static GameLoop() {
         //Call updates on GameObjects
-        Game.prevFrameTime = performance.now();
-        for (let i = 0; i < Game.gameObjects.length; i++) {
-            Game.gameObjects[i].Update();
+        const frameDuration = 1000 / Game.targetFPS;
+        //Game.prevFrameTime = performance.now();
+        const currentTime = performance.now();
+        Game.deltaTime = currentTime - Game.prevFrameTime;
+        if (Game.deltaTime >= frameDuration) {
+            Game.prevFrameTime = currentTime;
+            for (let i = 0; i < Game.gameObjects.length; i++) {
+                Game.gameObjects[i].Update();
+            }
+            Game.Render();
+            // Game.deltaTime = performance.now() - Game.prevFrameTime;
+            let fpsCounter = document.getElementsByClassName("fpscounter")[0];
+            let deltaTimeOut = document.getElementsByClassName("deltaTime")[0];
+            //vsync
+            let fpsCapElem = document.getElementById("fpsCap");
+            // let fpsCap: number = 30;
+            if (fpsCapElem != null)
+                Game.targetFPS = Number.parseInt(fpsCapElem.value || "60");
+            // let maxFrameRateDelay: number = 1 / fpsCap * 1000;
+            // maxFrameRateDelay -= Game.deltaTime;
+            // let fps: string;
+            // if (maxFrameRateDelay <= 0) {
+            //     maxFrameRateDelay = 0;
+            // }
+            // fps = ((1 / maxFrameRateDelay) * 1000).toFixed(2);
+            // else
+            // {
+            //     
+            // }
+            fpsCounter.style.color = "white";
+            deltaTimeOut.style.color = "white";
+            fpsCounter.innerText = `FPS: ${(1000 / Game.deltaTime).toFixed()}`;
+            deltaTimeOut.innerText = `DeltaTime: ${Math.round((Game.deltaTime * 10))}`;
         }
-        Game.Render();
-        Game.deltaTime = performance.now() - Game.prevFrameTime;
-        let fpsCounter = document.getElementsByClassName("fpscounter")[0];
-        //vsync
-        let fpsCapElem = document.getElementById("fpsCap");
-        let fpsCap = 30;
-        if (fpsCapElem != null)
-            fpsCap = Number.parseInt(fpsCapElem.value || "60");
-        let maxFrameRateDelay = 1 / fpsCap * 1000;
-        maxFrameRateDelay -= Game.deltaTime;
-        let fps;
-        if (maxFrameRateDelay <= 0) {
-            fps = ((1 / Game.deltaTime) * 1000).toFixed(2);
-        }
-        else {
-            fps = ((1 / maxFrameRateDelay) * 1000).toFixed(2);
-        }
-        fpsCounter.innerText = `FPS: ${fps}`;
-        setTimeout(Game.NextFrameHandler, maxFrameRateDelay);
+        requestAnimationFrame(Game.GameLoop);
+        // setTimeout(Game.NextFrameHandler, maxFrameRateDelay);
     }
     static NextFrameHandler() {
         requestAnimationFrame(Game.GameLoop);
@@ -156,3 +171,4 @@ Game.gameObjects = new Array(0);
 Game.prevFrameTime = -1;
 Game.deltaTime = 0;
 Game.timeRef = 0;
+Game.targetFPS = 45;
