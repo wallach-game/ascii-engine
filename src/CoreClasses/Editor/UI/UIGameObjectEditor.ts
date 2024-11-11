@@ -1,11 +1,13 @@
 import { UIComponent } from "./UIComponent.js";
+import { RegUIComp } from "./UIComponents.js";
 
+@RegUIComp("GameObjectEditor")
 export class UIGameObjectEditor extends UIComponent {
 
-constructor() {
-super();
-this.code =
-`
+    constructor(name: string) {
+        super(name);
+        this.code =
+            `
 <div style="display: flex; flex-direction: column;">
     <span style="color: white;">create GameObject</span>
     <input type="button" value="➕" id="createGameObject">
@@ -14,8 +16,6 @@ this.code =
     <input type="color" name="" id="gmColor">
     <input type="file" name="" id="gmScript">
 </div>
-`
-;
-
-}
+`;
+    }
 }

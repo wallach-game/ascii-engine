@@ -1,4 +1,5 @@
 import { UIComponent } from "./UI/UIComponent.js";
+import { UIComponents } from "./UI/UIComponents.js";
 
 export class OpenWindowWithComponent {
 
@@ -10,6 +11,11 @@ export class OpenWindowWithComponent {
             // Create HTML content
             const htmlContent = component.GetComponent().innerHTML;
 
+             UIComponents.GetRegisteredComponents().forEach(comp => {
+                winRef.window.customElements.define(comp.name, Object.assign({},comp) )
+            });
+
+       
             // Write the HTML content to the new window's document
             winRef.document.open();
             winRef.document.write(htmlContent);

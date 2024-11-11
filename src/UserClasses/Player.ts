@@ -4,8 +4,10 @@ import { IMoveable } from '../Interfaces/systemInterfaces/IMoveable.js'
 import { WholeNumberCompensator2D } from '../CoreClasses/Helpers/WholeNumberCompensator2D.js';
 import { WholeNumberCompensator } from '../CoreClasses/Helpers/WholeNumberCompensator.js';
 import { Input } from '../CoreClasses/Input.js';
+import { RegComp } from '../CoreClasses/ComponentRegistry.js';
 // @ts-check
 
+@RegComp("Player")
 export class Player extends GameObject implements IMoveable {
 
     colors: string[] = ["green","red","blue","yellow"];
