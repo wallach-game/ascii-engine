@@ -25,8 +25,11 @@
     "concurrently": "^9.1.0",
     "emoji-regex": "^10.4.0",
     "escape-html": "^1.0.3",
+    "express": "^4.21.1",
+    "fs": "^0.0.1-security",
     "http-server": "^14.1.1",
     "live-server": "^1.2.0",
+    "path": "^0.12.7",
     "typescript": "^5.6.3",
     "wrap-ansi": "^9.0.0",
     "xxhash-wasm": "^1.0.2"
