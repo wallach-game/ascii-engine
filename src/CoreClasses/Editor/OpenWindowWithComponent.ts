@@ -20,8 +20,8 @@ export class OpenWindowWithComponent {
        
             // Write the HTML content to the new window's document
             winRef.document.open();
-            winRef.document.write(`<ui-gameobject-editor>`);
-            // winRef.document.close();
+            winRef.document.write(`<${component.tagName}>`);
+            winRef.document.close();
         } else {
             console.error("Failed to open the new window.");
         }

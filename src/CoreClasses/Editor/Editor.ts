@@ -3,7 +3,9 @@ import { GameObject } from "../GameObject.js";
 import { Player } from "../../UserClasses/Player.js";
 import { OpenWindowWithComponent } from "./OpenWindowWithComponent.js";
 import { UIGameObjectEditor } from "./UI/UIGameObjectEditor.js";
-import { UIOpenEditorButton } from "./UI/UIOpenEditorButton.js";
+import { UILevelEditor } from "./UI/UILevelEditor.js";
+import { UIOpenGameObjectEditorButton } from "./UI/UIOpenGameObjectEditorButton.js";
+import { UIOpenLevelEditorButton } from "./UI/UIOpenLevelEditor.js";
 
 
 export class Editor {
@@ -17,7 +19,8 @@ export class Editor {
     public Init() {
         document.title ="Editor";
         document.body.style.backgroundColor = "#111111";
-        let openGmEditorComp = new UIOpenEditorButton();
+        let openGmEditorComp = new UIOpenGameObjectEditorButton();
+        let openLevelEditorComp = new UIOpenLevelEditorButton();
 
     }
 
@@ -35,6 +38,11 @@ export class Editor {
         let editorComp: UIGameObjectEditor = new UIGameObjectEditor();
         editorComp.classes = ComponentRegistry.GetAllComponents();
         OpenWindowWithComponent.OpenWindowWithComp(editorComp);
-        console.log(this.classes.length);
+    }
+
+    static OpenLevelEditor():void
+    {
+        let levelEditor = new UILevelEditor()
+        OpenWindowWithComponent.OpenWindowWithComp(levelEditor);
     }
 }

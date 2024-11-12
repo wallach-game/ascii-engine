@@ -12,6 +12,11 @@ export class UIComponents {
         window.customElements.define(name, compConst);
     }
 
+    public static GetRegisteredComponent(compConst: CustomElementConstructor)
+    {
+        return this.customComponents.filter(compConst => compConst);
+    }
+
 
     public static GetRegisteredComponents():Array<UIComponentStore> 
     {
