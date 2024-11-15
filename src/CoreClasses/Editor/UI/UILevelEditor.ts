@@ -1,8 +1,10 @@
 import { UIComponents } from "./UIComponents.js";
 import { Editor } from "../Editor.js";
+import { GameObject } from "../../GameObject.js";
 export class UILevelEditor extends HTMLElement {
 
     public classes: string[] = [];
+    private gameObjects: GameObject[] = [];
 
     constructor() {
         super();
@@ -20,6 +22,7 @@ export class UILevelEditor extends HTMLElement {
             <input type="number" name="" id="lheight" value="10">
             <div id="levelEditor">
             </div>
+            <select id="GameobjectSelector"></select>
             `;
 
             this.InitLevelEditor();
@@ -54,6 +57,11 @@ export class UILevelEditor extends HTMLElement {
                 gameWindow.append(elem);
             }
         }
+
+        //load Gameobject from /src/gameobjects folder
+        
+
+        
     }
 
 
