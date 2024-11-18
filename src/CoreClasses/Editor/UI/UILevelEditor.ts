@@ -58,10 +58,36 @@ export class UILevelEditor extends HTMLElement {
             }
         }
 
-        //load Gameobject from /src/gameobjects folder
+        //load Gameobject from ./gameobjects 
+        
+        //load html..
+        fetch("http://localhost:8080/gameobjects/")
+        .then(response => response.text())
+        .then(data => this.ParseGameObjects(data))
+        .catch(error => console.error(error));
+
+        
         
 
         
+    }
+
+
+    ParseGameObjects(html: string):void 
+    {
+        let queryElem: HTMLElement = document.createElement("div");
+        queryElem.innerHTML = html;
+        let linkElements: NodeListOf<HTMLAnchorElement> | undefined = queryElem?.querySelectorAll("a");
+        for (let i = 3; i < linkElements.length; i++) {
+            const element = linkElements[i];
+            let gameObject:string = element.getAttribute("title")!;
+            let option:HTMLElement = document.createElement("option");
+            option.innerText = gameObject;
+            option.setAttribute("value", gameObject);
+            this.shadowRoot!.getElementById("GameobjectSelector")?.append(option);
+        }
+        //linkElements: NodeListOf<HTMLElement> = [];
+        // insert elems into Select thingy
     }
 
 

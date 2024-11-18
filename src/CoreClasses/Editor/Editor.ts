@@ -17,6 +17,7 @@ export class Editor {
 
 
     public Init() {
+        debugger;
         document.title ="Editor";
         document.body.style.backgroundColor = "#111111";
         let openGmEditorComp = new UIOpenGameObjectEditorButton();

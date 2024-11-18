@@ -7,4 +7,6 @@ export class Level {
     // with level loading
 
     gameobjects: Array2D<GameObject> = new Array2D(Game.height,Game.height,new GameObject(true));
+
+    
 }

@@ -1,6 +1,5 @@
 import { Editor } from "../Editor.js";
 import { UIComponents } from "./UIComponents.js";
-import { ComponentRegistry } from "../../ComponentRegistry.js";
 export class UIGameObjectEditor extends HTMLElement {
 
     public classes: string[] = [];
